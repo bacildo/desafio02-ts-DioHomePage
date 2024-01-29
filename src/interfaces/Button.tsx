@@ -1,3 +1,6 @@
+import { MouseEventHandler } from "react";
+
 export interface IButton {
-  data: string;
+  click: MouseEventHandler
+  message:string
 }

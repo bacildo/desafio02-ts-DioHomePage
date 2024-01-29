@@ -1,9 +1,16 @@
 import { Box, Center, Input } from "@chakra-ui/react";
+import { useState } from "react";
 import { ICard } from "../interfaces/Card";
 import { Header } from "./Header";
 import { LoginButton } from "./LoginButton";
+import { login } from "../services/login";
 
-export const Card = ({ id, paragraph, details }: ICard) => {
+
+
+export const Card = ({ id, loginMessage, buttonName }: ICard) => {
+
+   const[email, setEmail] = useState("")
+
   return (
     <div id={`${id}`}>
       <Header />
@@ -16,11 +23,11 @@ export const Card = ({ id, paragraph, details }: ICard) => {
             boxSize="-webkit-fit-content"
             alignItems="baseline"
           >
-            <Center>{paragraph}</Center>
-            <Input placeholder="Digite seu email" type="email" />
+            <Center>{loginMessage}</Center>
+            <Input placeholder="Digite seu email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} />
             <Input placeholder="Digite sua senha" type="password" />
             <Center>
-              <LoginButton data={details} />
+              <LoginButton click={() => login(email)} message={buttonName}/>
             </Center>
           </Box>
         </Center>

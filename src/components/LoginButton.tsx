@@ -1,23 +1,18 @@
 import { Button } from "@chakra-ui/react";
 import { IButton } from "../interfaces/Button";
-import { login } from "../services/login";
 
-export const LoginButton = ({ data }: IButton) => {
-  const button = () => {
-    login();
-  };
+
+export const LoginButton = ({ click,message }: IButton) => {
+
   return (
     <Button
-      onClick={() => {
-        button();
-      }}
+      onClick={click}
       size="sm"
-      width="15%"
+      width="20%"
       borderInline="Background"
-      borderRadius="15px"
+      borderRadius="15px" 
     >
-      {" "}
-      {data}{" "}
+      {message}
     </Button>
   );
 };

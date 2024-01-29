@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <ChakraProvider>
-        <Card id={1} paragraph={"Realize o login"} details={"Login"} />
+        <Card id={1} loginMessage={"Realize o login"} buttonName= {'Login'}   />
       </ChakraProvider>
     </>
   );
