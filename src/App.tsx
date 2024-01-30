@@ -1,13 +1,23 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Conta } from "./pages/Conta";
 import { ChakraProvider } from "@chakra-ui/react";
-import { Card } from "./components/Card";
+import { Layout } from "./components/Layout";
+
 
 function App() {
   return (
-    <>
-      <ChakraProvider>
-        <Card id={1} loginMessage={"Realize o login"} buttonName= {'Login'}   />
-      </ChakraProvider>
-    </>
+    <BrowserRouter>
+    <ChakraProvider>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/conta" element={<Conta />} />
+        </Routes>
+      </Layout>
+    </ChakraProvider>
+    
+    </BrowserRouter>
   );
 }
 
