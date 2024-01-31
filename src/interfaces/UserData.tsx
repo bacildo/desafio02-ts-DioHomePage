@@ -3,4 +3,5 @@ export interface IUserData {
   usuario: string;
   senha: string;
   saldo:number;
+  id: string;
 }

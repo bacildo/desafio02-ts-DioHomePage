@@ -1,11 +1,25 @@
 import { Center, SimpleGrid, Spinner } from "@chakra-ui/react";
-import { CardContaInfo } from "../components/CardContaInfo";
-import { IUserData } from "../interfaces/UserData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { api } from "../api";
+import { CardContaInfoUser } from "../components/CardContaInfoUser";
+import { IUserData } from "../interfaces/UserData";
+import { useParams, useNavigate } from "react-router-dom";
+import { AppContext } from "../components/AppContext";
 
 export const Conta = () => {
   const [userData, setUserdata] = useState<null | IUserData>();
+  const {id} = useParams()
+  const navigate = useNavigate()
+  const {isLoggedIn} = useContext(AppContext)
+  const getActualData = new Date().toLocaleDateString("pt-BR");
+  const getActualHour = new Date().getHours();
+  const getActualMinutes = new Date().getMinutes();
+   
+  if(userData && id !== userData.id ){
+    navigate('/')
+  }
+
+  !isLoggedIn && navigate('/')
 
   useEffect(() => {
     const apiGet = async () => {
@@ -15,9 +29,10 @@ export const Conta = () => {
     apiGet();
   }, []);
 
-  const getActualData = new Date().toLocaleDateString("pt-BR");
-  const getActualHour = new Date().getHours();
-  const getActualMinutes = new Date().getMinutes();
+  console.log(userData);
+
+
+
 
   return (
     <Center>
@@ -28,11 +43,11 @@ export const Conta = () => {
           </Center>
         ) : (
           <>
-            <CardContaInfo
+            <CardContaInfoUser
               mainText={`Bem vindo,${userData?.nome}!`}
               text={`${getActualData} ${getActualHour}:${getActualMinutes}`}
             />
-            <CardContaInfo mainText="Saldo" text={`R$ ${userData.saldo}`} />
+            <CardContaInfoUser mainText="Saldo" text={`R$ ${userData.saldo}`} />
           </>
         )}
       </SimpleGrid>

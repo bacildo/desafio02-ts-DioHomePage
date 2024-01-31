@@ -1,6 +1,10 @@
 import { Heading } from "@chakra-ui/react";
+// import { useContext } from "react";
+// import { AppContext } from "./AppContext";
+
 
 export const Header = () => {
+  // const context = useContext(AppContext)
   return (
     <Heading
       as="h1"

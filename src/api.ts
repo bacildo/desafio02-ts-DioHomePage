@@ -2,7 +2,8 @@ const conta = {
   nome:"Diogo",
   email:"bacildo@gmail.com",
   senha:"123456",
-  saldo:5000.00
+  saldo:5000.00,
+  id:'1'
 }
 
 export const api = new Promise((resolve) => {

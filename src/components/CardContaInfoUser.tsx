@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
-import { ICardContaInfo } from "../interfaces/CardContaInfo";
+import { ICardContaInfoUser } from "../interfaces/ContaInfoUser";
 
-export const CardContaInfo = ({ mainText, text }: ICardContaInfo) => {
+export const CardContaInfoUser = ({ mainText, text }: ICardContaInfoUser) => {
   return (
     <Box
       backgroundColor="white"
