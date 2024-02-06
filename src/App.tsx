@@ -3,10 +3,10 @@ import { BrowserRouter } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { AppContextProvider } from "./components/AppContext";
 import { MainRoutes } from "./routes/routes";
-import { getLocalStorage } from "./services/storage";
-function App() { 
-
-  const storage = getLocalStorage()
+import { createLocalStorage, getLocalStorage } from "./services/storage";
+function App() {
+  
+  !getLocalStorage() && createLocalStorage()
 
   return (
     <BrowserRouter>

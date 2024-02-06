@@ -1,9 +1,34 @@
-import { getLocalStorage } from "./storage";
+import {
+  createLocalStorage,
+  getLocalStorage,
+  updateLocalStorage,
+} from "./storage";
+
+const authentication = {
+  login: false,
+};
 
 describe("storage", () => {
-  const getItem = jest.spyOn(Storage.prototype, "getItem");
-  it("Deve retornar objeto no localStorages", () => {
+  const mockSetItem = jest.spyOn(Storage.prototype, "setItem");
+  it("Deve retornar objeto no localStorage com a chave authentication", () => {
+    const mockGetItem = jest.spyOn(Storage.prototype, "getItem");
     getLocalStorage();
-    expect(getItem).toHaveBeenCalled();
+    expect(mockGetItem).toHaveBeenCalledWith("authentication");
+  });
+
+  it("Deve criar o objeto no localStorage", () => {
+    createLocalStorage();
+    expect(mockSetItem).toHaveBeenCalledWith(
+      "authentication",
+      JSON.stringify(authentication)
+    );
+  });
+
+  it("Deve atualizar o objeto no localStorage", () => {
+    updateLocalStorage(authentication);
+    expect(mockSetItem).toHaveBeenCalledWith(
+      "authentication",
+      JSON.stringify(authentication)
+    );
   });
 });
