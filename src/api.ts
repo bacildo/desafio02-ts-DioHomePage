@@ -11,3 +11,4 @@ export const api = new Promise((resolve) => {
     resolve(conta)
   }, 3000)
 })
+
