@@ -9,17 +9,18 @@ import { updateLocalStorage } from "../services/storage";
 
 export const Home = () => {
   const [email, setEmail] = useState<string>("");
-  const { setIsLoggedIn } = useContext(AppContext);
+  const [senha, setSenha] = useState<string>("");
+  const { setUser } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const userValidate = async (email: string): Promise<any> => {
-    const loggedIn: any = await Login(email);
+  const userValidate = async (email: string, senha: string, saldo?:number, nome?:string, id?: string): Promise<any> => {
+    const loggedIn: any = await Login(email, senha);
 
     if (!loggedIn) {
-      alert("Email inválido!");
+      alert("Dados inválidos, verifique seu usuário e senha!");
     } else {
-      setIsLoggedIn(true);
-      updateLocalStorage({login:true})
+      setUser({login:true});
+      updateLocalStorage({ login: true, senha: senha, usuario:email, saldo:saldo, nome:nome, id:id, email:email});
       navigate("/conta/1");
     }
   };
@@ -44,9 +45,17 @@ export const Home = () => {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
-            <Input placeholder="Digite sua senha" type="password" />
+            <Input
+              placeholder="Digite sua senha"
+              type="password"
+              value={senha}
+              onChange={(event) => setSenha(event.target.value)}
+            />
             <Center>
-              <LoginButton click={() => userValidate(email)} message="Login" />
+              <LoginButton
+                click={() => userValidate(email, senha)}
+                message="Login"
+              />
             </Center>
           </Box>
         </Center>

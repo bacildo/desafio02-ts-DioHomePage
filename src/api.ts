@@ -1,4 +1,8 @@
-const conta = {
+import { IConta } from "./interfaces/Conta"
+
+
+const conta:IConta = {
+
   nome:"Diogo",
   email:"bacildo@gmail.com",
   senha:"123456",

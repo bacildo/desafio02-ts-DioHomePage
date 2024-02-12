@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { updateLocalStorage } from "../services/storage";
 
 export const Header = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
   const navigate = useNavigate();
   const logout = () => {
     updateLocalStorage({ login: false });
-    setIsLoggedIn(false);
+    setUser({ login: false });
     navigate("/");
   };
 
@@ -22,7 +22,7 @@ export const Header = () => {
           </Text>
         </Center>
       </Box>
-      {isLoggedIn && (
+      {user && (
         <>
           <Spacer />
           <Button onClick={() => logout()} color="#000000">

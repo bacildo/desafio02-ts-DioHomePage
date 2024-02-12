@@ -1,4 +1,4 @@
-import { Center, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Button, Center, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../api";
 import { CardContaInfoUser } from "../components/CardContaInfoUser";
@@ -8,18 +8,18 @@ import { AppContext } from "../components/AppContext";
 
 export const Conta = () => {
   const [userData, setUserdata] = useState<null | IUserData>();
-  const {id} = useParams()
-  const navigate = useNavigate()
-  const {isLoggedIn} = useContext(AppContext)
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { user } = useContext(AppContext);
   const getActualData = new Date().toLocaleDateString("pt-BR");
   const getActualHour = new Date().getHours();
   const getActualMinutes = new Date().getMinutes();
-   
-  if(userData && id !== userData.id ){
-    navigate('/')
+
+  if (userData && id !== userData.id) {
+    navigate("/");
   }
 
-  !isLoggedIn && navigate('/')
+  !user && navigate("/");
 
   useEffect(() => {
     const apiGet = async () => {
@@ -29,10 +29,9 @@ export const Conta = () => {
     apiGet();
   }, []);
 
-  console.log(userData);
-
-
-
+  const nextPage = () => {
+    navigate("/containfo");
+  };
 
   return (
     <Center>
@@ -50,6 +49,10 @@ export const Conta = () => {
             <CardContaInfoUser mainText="Saldo" text={`R$ ${userData.saldo}`} />
           </>
         )}
+
+        <Button onClick={() => nextPage()} color="#000000" padding="2px">
+          Info Conta
+        </Button>
       </SimpleGrid>
     </Center>
   );

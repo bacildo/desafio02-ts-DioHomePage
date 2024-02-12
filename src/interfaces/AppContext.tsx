@@ -1,5 +1,7 @@
-export interface IAppContext {
-  user: string;
-  isLoggedIn: boolean;
-  setIsLoggedIn: (isLoggedIn: boolean) => void;
+import { IUserData } from "./UserData";
+
+export interface IAppContext{
+  user: IUserData;
+  setUser: React.Dispatch<React.SetStateAction<IUserData>>;
+
 }

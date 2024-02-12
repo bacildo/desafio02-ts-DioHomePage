@@ -6,12 +6,15 @@ import { useContext } from "react";
 import { AppContext } from "../components/AppContext";
 
 export const MainRoutes = () => {
-  const { isLoggedIn } = useContext(AppContext);
+  const { user } = useContext(AppContext);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/conta/:id" element={isLoggedIn ? <Conta /> : <Home />} />
-      <Route path="/containfo" element={<ContaInfo />} />
+      <Route path="/conta/:id" element={user ? <Conta /> : <Home />} />
+      <Route
+        path="/containfo"
+        element={user.login === true ? <ContaInfo /> : <Home />}
+      />
     </Routes>
   );
 };
